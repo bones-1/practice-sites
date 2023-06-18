@@ -1,0 +1,10 @@
+@mixin plain-link ($color) {
+  a {
+    &:visited,
+    &:active,
+    &:link {
+      color: $color;
+    }
+    text-decoration: none;
+  }
+}

@@ -2,22 +2,18 @@ $font-color-blue: #0a5c80;
 $font-color-dark: #000000;
 
 @use "sass:color";
-@use "index.scss" as i;
+@use "index" as i;
 
 @include i.page-layout;
-
-a {
-  &:visited,
-  &:active,
-  &:link {
-    color: $font-color-blue;
-  }
-  text-decoration: none;
-}
+@include i.plain-link($font-color-blue);
 
 nav {
   $nav-row-height: 5rem;
 
+  font:{
+    family: gotham;
+    size: 1.3rem;
+  }
   position: relative;
 
   a {
@@ -67,9 +63,8 @@ nav {
     .login-section {
       span {
         display: inline-block;
-        line-height: 5ch;
+        line-height: 3.5ch;
         padding: 0 2ch;
-        font-size: 1.4rem;
       }
     }
   }
@@ -88,28 +83,36 @@ nav {
         padding: 0 3ch;
         display: inline-block;
       }
+
+      a:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
 
 aside {
+  @include i.plain-link ($font-color-dark);
+
   width: 320px;
   position: absolute;
   top: 0;
-//   left: -320px;
+  left: -320px;
+  z-index: -1;
   height: 100vh;
   overflow: scroll;
   overscroll-behavior: none;
   
   table {
+    $table-color: #f5f5f5;
+
     width: 100%;
     border-spacing: 0;
-    background-color: #f5f5f5;
+    background-color: $table-color;
 
     td {
       //   background-color: lightyellow;
       display: flex;
-      justify-content: space-between;
       align-items: center;
       text-transform: capitalize;
       height: 4rem;
@@ -118,10 +121,23 @@ aside {
         left: 2rem;
       }
 
+      &:not(.other){
+        justify-content: space-between;
+      }
+
+      &.locality .text {
+        margin-right: 5ch;
+      }
+
+      &.legal {
+        gap: 3ch;
+      }
+
       img {
         @include i.square-image(1.3rem);
       }
     }
+    
     tr {
       &:first-of-type td {
         margin: 0 auto;
@@ -135,13 +151,17 @@ aside {
         }
       }
 
-      svg.search {
+      .icon.left {
         @include i.square-image(2rem);
         margin-right: 1rem;
       }
 
       svg.close {
         @include i.square-image(2.5rem);
+      }
+
+      &:hover {
+        background-color: color.scale($table-color, $lightness: 60%);
       }
     }
   }
