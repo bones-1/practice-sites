@@ -1,0 +1,21 @@
+@mixin page-layout {
+  html,
+  body {
+    padding: 0px;
+    margin: 0px;
+    border: unset;
+    box-sizing: border-box;
+    font-size: 10px;
+    width: 100%;
+
+  body {
+      font-size: 1.6rem;
+    }
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+}
