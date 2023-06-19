@@ -7,3 +7,31 @@
   }
   src: url("../assets/fonts/GothamMedium.ttf") format("truetype");
 }
+
+@font-face {
+    font: {
+    display: swap;
+    family: kepler;
+    style: normal;
+    }
+    src: url('../assets/fonts/KeplerStdLight.otf') format('opentype');
+}
+
+@font-face {
+    font: {
+        display: swap;
+        family: charter;
+        style: normal;
+    }
+    src: url('../assets/fonts/CharterBT.ttf') format('truetype');
+}
+
+@font-face {
+  font: {
+    display: swap;
+    family: kepler-medium;
+    style: medium;
+  }
+
+  src: url('../assets/fonts/KeplerStdMedium.otf') format('opentype');
+}

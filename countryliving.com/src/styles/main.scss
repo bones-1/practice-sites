@@ -1,4 +1,5 @@
 $font-color-blue: #0a5c80;
+$font-bgcolor-blue: #cde5f0;
 $font-color-dark: #000000;
 
 @use "sass:color";
@@ -7,18 +8,23 @@ $font-color-dark: #000000;
 @include i.page-layout;
 @include i.plain-link($font-color-blue);
 
+// * {
+//   border: 1px dashed red;
+// }
+
 nav {
   $nav-row-height: 5rem;
 
-  font:{
+  font: {
     family: gotham;
     size: 1.3rem;
   }
+
   position: relative;
 
   a {
-    &:first-of-type > span {
-      background-color: #cde5f0;
+    &:first-of-type>span {
+      background-color: $font-bgcolor-blue;
 
       &:hover {
         background-color: color.scale(#cde5f0, $lightness: -5%);
@@ -47,7 +53,7 @@ nav {
       height: 100%;
       align-items: center;
 
-    //   color changes on hover
+      //   color changes on hover
       svg {
         @include i.square-image($icon-height);
         margin-left: 3ch;
@@ -56,7 +62,6 @@ nav {
       .logo {
         height: $icon-height;
         margin-left: 1ch;
-       
       }
     }
 
@@ -68,31 +73,39 @@ nav {
       }
     }
   }
+
   .bottom-bar {
     ul {
+      margin: 0px;
       padding-left: 0px;
       width: 100%;
       display: flex;
       text-transform: uppercase;
       list-style: none;
-      overflow: scroll;
+      overflow: auto;
       white-space: nowrap;
       text-align: center;
       scrollbar-width: none;
+
       li {
-        padding: 0 3ch;
         display: inline-block;
+        padding: 0 3ch;
       }
 
       a:hover {
         text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
       }
     }
   }
 }
 
-aside {
-  @include i.plain-link ($font-color-dark);
+aside.side-nav {
+  @include i.plain-link($font-color-dark);
 
   width: 320px;
   position: absolute;
@@ -102,7 +115,7 @@ aside {
   height: 100vh;
   overflow: scroll;
   overscroll-behavior: none;
-  
+
   table {
     $table-color: #f5f5f5;
 
@@ -116,12 +129,13 @@ aside {
       align-items: center;
       text-transform: capitalize;
       height: 4rem;
+
       padding: {
         right: 1.2rem;
         left: 2rem;
       }
 
-      &:not(.other){
+      &:not(.other) {
         justify-content: space-between;
       }
 
@@ -137,7 +151,7 @@ aside {
         @include i.square-image(1.3rem);
       }
     }
-    
+
     tr {
       &:first-of-type td {
         margin: 0 auto;
@@ -165,4 +179,210 @@ aside {
       }
     }
   }
+}
+
+main {
+  width: 100%;
+
+  a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .section-map {
+    margin-top: 25px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    font: {
+      size: 1.1rem;
+      weight: lighter;
+      family: gotham;
+    }
+
+    color: color-scale($font-color-blue, 30%);
+  }
+
+  .page-details {
+    text-align: center;
+    padding: 20px;
+
+    .page-title {
+
+      margin: 0 auto;
+
+      font: {
+        family: kepler;
+        weight: normal;
+        size: 4.2rem;
+      }
+    }
+
+    .slogan {
+      font: {
+        family: kepler;
+        size: 1.94rem
+      }
+
+      letter-spacing: 1px;
+    }
+
+    .publication-details {
+      font: {
+        family: gotham;
+        weight: normal;
+        size: 1.12rem;
+      }
+
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      column-gap: 2.5ch;
+      letter-spacing: 1px;
+      flex-wrap: wrap;
+    }
+
+    .author {
+      font-style: normal;
+      // background-color: pink;
+
+      &:before {
+        content: "";
+        background: url("../assets/img/author-pp.jpg");
+        display: inline-block;
+        height: 45px;
+        width: 45px;
+        background-size: contain;
+        border-radius: 50px;
+        vertical-align: middle;
+        // margin-right:;
+      }
+    }
+
+    .pub-date {
+      margin: 0px;
+    }
+
+    // Text is not completely center
+    .bookmark {
+      margin-top: 2.8rem;
+      background-color: $font-bgcolor-blue;
+      color: $font-color-blue;
+      padding: 0.9rem 2rem;
+
+      &:before {
+        content: "";
+
+        background: {
+          image: url('../assets/icons/bookmark.svg');
+          size: contain;
+          repeat: no-repeat;
+        }
+
+        display: inline-block;
+        height: 25px;
+        width: 25px;
+        vertical-align: middle;
+      }
+    }
+
+    .introduction {
+      text-align: left;
+      letter-spacing: 0.5px;
+      line-height: 3rem;
+
+      font: {
+        family: 'charter', sans-serif;
+        size: 1.78rem;
+      }
+    }
+  }
+
+  .dog-card {
+    $text-indent: 2ch;
+
+    display: grid;
+    grid-template-columns: $text-indent auto $text-indent;
+    width: 100%;
+
+    h2,
+    h3 {
+      text-align: center;
+      margin: 0px;
+      grid-column: 1 / -1;
+
+      font: {
+        family: kepler-medium;
+        weight: lighter;
+      }
+    }
+
+    h2 {
+      font-size: 6.77rem;
+    }
+
+    h3 {
+      font-size: 2.65rem;
+    }
+
+    p,
+    .bio-specs {
+      grid-column: 2 / 2;
+
+      font: {
+        family: 'charter';
+        size: 1.85rem;
+      }
+    }
+
+    p {
+      line-height: 3rem;
+      margin: 0px;
+    }
+
+    .bio-specs {
+      margin: {
+        top: 2.5rem;
+        bottom: 4.3rem;
+      }
+        span {
+          font-weight: bold;
+          margin-right: 1ch;
+        }
+      }
+    
+
+    figure {
+      grid-column: 1 / -1;
+      width: 100%;
+
+      margin: {
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+      }
+
+      img {
+        width: 100%;
+      }
+
+      figcaption {
+        font: {
+          family: gotham;
+          weight: lighter;
+          size: 1.15rem;
+        }
+
+        color: #6f6f6f;
+        background-color: rgba(225, 225, 225, 0.85);
+        width: max-content;
+        padding: 0rem 1.4rem;
+        line-height: 3rem;
+        position: relative;
+        top: -3.8ch;
+      }
+    }
+  }
+
 }
