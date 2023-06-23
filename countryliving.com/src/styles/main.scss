@@ -183,10 +183,20 @@ aside.side-nav {
 
 main {
   width: 100%;
+  display: grid;
+  grid-template-columns: 2rem auto 2rem;
+
+  & > *:not(.main-content, .closing-content) {
+    grid-column-start: 2;
+  }
 
   a {
     text-decoration: underline;
     text-underline-offset: 4px;
+  }
+
+  .italic {
+    font-style: italic;
   }
 
   .section-map {
@@ -206,7 +216,6 @@ main {
 
   .page-details {
     text-align: center;
-    padding: 20px;
 
     .page-title {
 
@@ -243,9 +252,10 @@ main {
       flex-wrap: wrap;
     }
 
+    // author name is not going black
     .author {
       font-style: normal;
-      // background-color: pink;
+      color: #000000 !important;
 
       &:before {
         content: "";
@@ -256,7 +266,6 @@ main {
         background-size: contain;
         border-radius: 50px;
         vertical-align: middle;
-        // margin-right:;
       }
     }
 
@@ -264,7 +273,6 @@ main {
       margin: 0px;
     }
 
-    // Text is not completely center
     .bookmark {
       margin-top: 2.8rem;
       background-color: $font-bgcolor-blue;
@@ -294,11 +302,14 @@ main {
 
       font: {
         family: 'charter', sans-serif;
-        size: 1.78rem;
+        size: 1.8rem;
       }
     }
   }
-
+  
+  .main-content {
+    grid-column: 1 /-1;
+  }
   .dog-card {
     $text-indent: 2ch;
 
@@ -346,12 +357,13 @@ main {
         top: 2.5rem;
         bottom: 4.3rem;
       }
-        span {
-          font-weight: bold;
-          margin-right: 1ch;
-        }
+
+      span {
+        font-weight: bold;
+        margin-right: 1ch;
       }
-    
+    }
+
 
     figure {
       grid-column: 1 / -1;
@@ -380,9 +392,216 @@ main {
         padding: 0rem 1.4rem;
         line-height: 3rem;
         position: relative;
-        top: -3.8ch;
+        top: -4.05ch;
       }
     }
   }
+
+  .closing-content {
+    grid-column: 2 / -1;
+    display: grid;
+    grid-template-columns: auto 2rem;
+    & > *:not(.comments){
+      grid-column: 1;
+    }
+
+    .sign-up {
+      font-family: 'kepler';
+    }
+
+    hr {
+      border: 0px;
+      border-bottom: 1px solid black;
+      margin-bottom: 2.15rem;
+
+      &.dull-line {
+        border-color: rgba(0, 0, 0, 0.15);
+      }
+    }
+
+    h4 {
+      font: {
+        weight: lighter;
+        size: 2.68rem;
+      }
+
+      margin: 0px;
+    }
+
+    .subscribe {
+      font-size: 1.66rem;
+
+      margin: {
+        top: 1rem;
+        bottom: 2.2rem;
+      }
+    }
+
+    // input:hover {
+    //   cursor: not-allowed;
+    // } 
+
+    input[type=email] {
+      height: 4.8rem;
+      width: 100%;
+      border: 1px #c9c7cc solid;
+
+      font: {
+        family: 'gotham';
+        size: 1.24rem;
+      }
+
+      color: #414141;
+      padding-left: 4ch;
+
+      background: {
+        image: url("../assets/icons/email-icon.svg");
+        repeat: no-repeat;
+        position-y: center;
+        position-x: 1ch;
+        size: 4%;
+      }
+    }
+
+    input[type=submit] {
+      color: $font-color-blue;
+
+      font: {
+        family: 'gotham';
+      }
+
+      border: none;
+      background-color: $font-bgcolor-blue;
+      padding: 1ch;
+      margin: 1ch 0ch;
+      width: 30%;
+      display: inline-block;
+      white-space: normal;
+      border-radius: 5px;
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+    // make plain-link accept scss function to determine underline
+    .terms {
+      @include i.plain-link(#696969);
+      color: #696969;
+
+      a {
+        text-decoration: underline;
+      }
+
+      font-size: 1.23rem;
+
+      margin: {
+        top: 0px;
+        bottom: 2.2rem;
+      }
+    }
+  }
+
+  // Intentionally designed comments section to offset to the right, as seen on to original webpage. My aim is to produce a replica.
+  .comments {
+    grid-column: 1 / -1;
+    position: relative;
+
+    h4,
+    h4+p {
+      font: {
+        family: arial;
+        weight: bold;
+        size: 2.23rem
+      }
+
+      color: #373e44;
+      display: inline-block;
+
+      margin: {
+        top: 2.85rem;
+        bottom: 0.8rem;
+      }
+    }
+
+    h4+p {
+      font: {
+        size: 1.5rem;
+      }
+
+      color: rgba(55, 62, 68, 0.75);
+      margin-left: 0.7ch
+    }
+
+    .icon-title {
+
+    }
+
+    .icon {
+
+    }
+
+
+    input[type=text] {
+      display: block;
+      height: 9rem;
+      border: 1px #c9c7cc solid; /*This was duplicated. Not very DRY*/
+      width: 100%;
+      border-radius: 5px;
+      margin: 2.9rem 0 0.8rem;
+      padding:{ 
+        left: 2rem;
+        right: 2rem;
+        top: 2rem;
+        bottom: 6rem;
+
+      }
+      font-size: 1.57rem;
+    }
+
+    .comment-input-icons {
+      position: absolute;
+      top: 18rem;
+      right: 2rem;
+      display: flex;
+      gap: 1.5ch;
+    }
+
+    .icon {
+      height: 20px;
+      width: 20px;
+      fill: #a8a8a8;
+      &:hover {
+        fill: #0048ff;
+        cursor: pointer;
+      }
+    }
+
+    icon[attr=title] {
+      color: yellow;
+    }
+
+    input[type=submit] {
+      $submit-bgcolor: #2778ce;
+
+      background-color: $submit-bgcolor;
+      color: white;
+      font: {
+        family: arial;
+        weight: bold;
+        size: 1.5rem;
+      }
+      display: block;
+      margin-left: auto;
+      margin-right: 2px;
+      width: 13rem;
+      &:hover {
+        background-color: color.scale($submit-bgcolor, $lightness: -25%);
+        cursor: pointer;
+      }
+    }
+  }
+
+
 
 }

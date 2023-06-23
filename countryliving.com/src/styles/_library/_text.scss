@@ -1,10 +1,15 @@
 @mixin plain-link ($color) {
   a {
+
     &:visited,
     &:active,
-    &:link {
+    &:link,
+    &:hover,
+    &:focus {
       color: $color;
     }
+
     text-decoration: none;
+    text-underline-offset: unset;
   }
 }
