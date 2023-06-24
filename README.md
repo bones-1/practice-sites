@@ -4,7 +4,7 @@
 This repo contains some websites that I recreated to improve upon my coding proficiency.
 
 ## About this Project
-This is a compilation of websites that I have copied on my ongoing journey to becoming a Fullstack Developer. The websites contained within, have been recreated using my own methods; so this means that when you take a look at the source codes, they will be different from the original's (though certain assets will be replated, to make my version resemble the original's as closely as possible - such as fonts, images, colors, etc).
+This is a compilation of websites that I have copied on my ongoing journey to becoming a Fullstack Developer. The websites contained within, have been recreated using my own methods; so this means that when you take a look at the source codes, they will be different from the original's (though certain assets will be replicated, to make my version resemble the original's as closely as possible - such as fonts, images, icons, etc).
 
 ### Motivation
 The purpose behind recreating these sites is to brush up on what I already know, as well as to employ additional skills that I have come across.
