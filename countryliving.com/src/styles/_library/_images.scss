@@ -2,3 +2,53 @@
     height: $size;
     width: $size;
 }
+
+// TODO: CREATE A MARGIN TO CREATE SPACE BETWEEN THIS AND PARENT
+// Inserts an image ::after the parent element, moves it to the right edge of the parent's container, and vertically centers it. ** The parent element needs to have position relative/absolute.
+@mixin image-after ($height: 50px, $width: 50px, $url) {
+    & {
+        position: relative;
+    }
+    &::after {
+        content: '';
+        height: $height;
+        width: $width;
+        display: inline-block;
+
+        background: {
+            image: url($url);
+            position: 50%;
+            repeat: no-repeat;
+            size: contain;
+        };
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+}
+
+// Inserts an image ::before the parent element, moves it to the left edge of the parent's container, and vertically centers it. ** The parent element needs to have position relative/absolute.
+@mixin image-before ($height: 50px, $width: 50px, $url) {
+    & {
+        position: relative;
+    }
+    &::before {
+        content: '';
+        height: $height;
+        width: $width;
+        display: inline-block;
+
+        background: {
+            image: url($url);
+            position: 50%;
+            repeat: no-repeat;
+            size: contain;
+        };
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}

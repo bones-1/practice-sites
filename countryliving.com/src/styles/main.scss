@@ -23,7 +23,7 @@ nav {
   position: relative;
 
   a {
-    &:first-of-type>span {
+    &:first-of-type > span {
       background-color: $font-bgcolor-blue;
 
       &:hover {
@@ -115,6 +115,7 @@ aside.side-nav {
   height: 100vh;
   overflow: scroll;
   overscroll-behavior: none;
+  font-family: "kepler";
 
   table {
     $table-color: #f5f5f5;
@@ -122,35 +123,6 @@ aside.side-nav {
     width: 100%;
     border-spacing: 0;
     background-color: $table-color;
-
-    td {
-      //   background-color: lightyellow;
-      display: flex;
-      align-items: center;
-      text-transform: capitalize;
-      height: 4rem;
-
-      padding: {
-        right: 1.2rem;
-        left: 2rem;
-      }
-
-      &:not(.other) {
-        justify-content: space-between;
-      }
-
-      &.locality .text {
-        margin-right: 5ch;
-      }
-
-      &.legal {
-        gap: 3ch;
-      }
-
-      img {
-        @include i.square-image(1.3rem);
-      }
-    }
 
     tr {
       &:first-of-type td {
@@ -178,6 +150,40 @@ aside.side-nav {
         background-color: color.scale($table-color, $lightness: 60%);
       }
     }
+
+    td {
+      //  background-color: lightyellow;
+      // display: flex;
+      align-items: center;
+      text-transform: capitalize;
+      height: 3.8rem;
+
+      padding: {
+        right: 3rem;
+        left: 2rem;
+      }
+
+      &:not(.other) {
+        justify-content: space-between;
+      }
+
+      &.locality .text {
+        width: 50%;
+        display: inline-block;
+      }
+
+      &.legal {
+        gap: 3ch;
+      }
+
+      .text.extend {
+        @include i.image-after(
+          1.3rem,
+          1.3rem,
+          "../assets/icons/chevron-right.png"
+        );
+      }
+    }
   }
 }
 
@@ -199,6 +205,14 @@ main {
     font-style: italic;
   }
 
+  .bold {
+    font-weight: bold;
+  }
+
+  .faded {
+    opacity: 0.6;
+  }
+
   .section-map {
     margin-top: 25px;
     text-align: center;
@@ -218,7 +232,6 @@ main {
     text-align: center;
 
     .page-title {
-
       margin: 0 auto;
 
       font: {
@@ -231,7 +244,7 @@ main {
     .slogan {
       font: {
         family: kepler;
-        size: 1.94rem
+        size: 1.94rem;
       }
 
       letter-spacing: 1px;
@@ -283,7 +296,7 @@ main {
         content: "";
 
         background: {
-          image: url('../assets/icons/bookmark.svg');
+          image: url("../assets/icons/bookmark.svg");
           size: contain;
           repeat: no-repeat;
         }
@@ -301,15 +314,16 @@ main {
       line-height: 3rem;
 
       font: {
-        family: 'charter', sans-serif;
+        family: "charter", sans-serif;
         size: 1.8rem;
       }
     }
   }
-  
+
   .main-content {
     grid-column: 1 /-1;
   }
+
   .dog-card {
     $text-indent: 2ch;
 
@@ -342,7 +356,7 @@ main {
       grid-column: 2 / 2;
 
       font: {
-        family: 'charter';
+        family: "charter";
         size: 1.85rem;
       }
     }
@@ -363,7 +377,6 @@ main {
         margin-right: 1ch;
       }
     }
-
 
     figure {
       grid-column: 1 / -1;
@@ -398,15 +411,21 @@ main {
   }
 
   .closing-content {
+
     grid-column: 2 / -1;
     display: grid;
     grid-template-columns: auto 2rem;
-    & > *:not(.comments){
+
+    .pointer-on-hover:hover {
+      cursor: pointer
+    }
+
+    & > *:not(.comments) {
       grid-column: 1;
     }
 
     .sign-up {
-      font-family: 'kepler';
+      font-family: "kepler";
     }
 
     hr {
@@ -416,6 +435,13 @@ main {
 
       &.dull-line {
         border-color: rgba(0, 0, 0, 0.15);
+        &:nth-last-child(n - 2){
+          margin-bottom: 1.6rem;
+        }
+
+        &:last-of-type {
+          margin-top: 5.8rem;
+        }
       }
     }
 
@@ -439,15 +465,15 @@ main {
 
     // input:hover {
     //   cursor: not-allowed;
-    // } 
+    // }
 
-    input[type=email] {
+    input[type="email"] {
       height: 4.8rem;
       width: 100%;
       border: 1px #c9c7cc solid;
 
       font: {
-        family: 'gotham';
+        family: "gotham";
         size: 1.24rem;
       }
 
@@ -463,11 +489,11 @@ main {
       }
     }
 
-    input[type=submit] {
+    input[type="submit"] {
       color: $font-color-blue;
 
       font: {
-        family: 'gotham';
+        family: "gotham";
       }
 
       border: none;
@@ -487,7 +513,6 @@ main {
     // make plain-link accept scss function to determine underline
     .terms {
       @include i.plain-link(#696969);
-      color: #696969;
 
       a {
         text-decoration: underline;
@@ -503,16 +528,30 @@ main {
   }
 
   // Intentionally designed comments section to offset to the right, as seen on to original webpage. My aim is to produce a replica.
-  .comments {
+  .comments-section {
+    $grey-bghighlight: #eaeaea;
+
+    @include i.plain-link(#000000);
+
     grid-column: 1 / -1;
     position: relative;
+    font-family: Arial;
+
+    ul {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0;
+          margin: 0;
+          list-style: none;
+        }
+
 
     h4,
-    h4+p {
+    h4 + p {
       font: {
-        family: arial;
         weight: bold;
-        size: 2.23rem
+        size: 2.23rem;
       }
 
       color: #373e44;
@@ -524,38 +563,31 @@ main {
       }
     }
 
-    h4+p {
+    h4 + p {
       font: {
         size: 1.5rem;
       }
 
       color: rgba(55, 62, 68, 0.75);
-      margin-left: 0.7ch
+      margin-left: 0.7ch;
     }
 
-    .icon-title {
-
-    }
-
-    .icon {
-
-    }
-
-
-    input[type=text] {
+    input[type="text"] {
       display: block;
       height: 9rem;
-      border: 1px #c9c7cc solid; /*This was duplicated. Not very DRY*/
+      border: 1px #c9c7cc solid;
+      /*This was duplicated. Not very DRY*/
       width: 100%;
       border-radius: 5px;
       margin: 2.9rem 0 0.8rem;
-      padding:{ 
+
+      padding: {
         left: 2rem;
         right: 2rem;
         top: 2rem;
         bottom: 6rem;
-
       }
+
       font-size: 1.57rem;
     }
 
@@ -567,41 +599,167 @@ main {
       gap: 1.5ch;
     }
 
+    // Need to find a way to format title attributes
     .icon {
       height: 20px;
       width: 20px;
       fill: #a8a8a8;
+
       &:hover {
         fill: #0048ff;
         cursor: pointer;
       }
     }
 
-    icon[attr=title] {
-      color: yellow;
-    }
-
-    input[type=submit] {
+    input[type="submit"] {
       $submit-bgcolor: #2778ce;
 
       background-color: $submit-bgcolor;
       color: white;
+
       font: {
-        family: arial;
         weight: bold;
         size: 1.5rem;
       }
+
       display: block;
       margin-left: auto;
       margin-right: 2px;
-      width: 13rem;
+      width: max-content; //13rem;
+
       &:hover {
         background-color: color.scale($submit-bgcolor, $lightness: -25%);
         cursor: pointer;
       }
     }
+
+    .comments {
+      $section-main-size: 1.4rem;
+      $section-icon-size: 1.7rem;
+
+      font-size: $section-main-size;
+
+      .sort {
+        margin-bottom: 2.3rem;
+        width: max-content;
+        padding-right: 2.5ch;
+        @include i.image-after(
+          1.2rem,
+          1.2rem,
+          "../assets/icons/down-chevron.png"
+        );
+      }
+
+      .content {
+        & > * {
+          line-height: 2.4rem;
+          margin: 0 0 0 1ch;
+        }
+
+        & > p:first-of-type {
+          @include i.image-after(
+            1.2rem,
+            1.2rem,
+            "../assets/icons/ellipsis.svg"
+          );
+          &::after {
+            opacity: 0.5;
+          }
+          // background-color: yellow;
+        }
+
+        time {
+          font-size: 1.3rem;
+        }
+
+        .italic.faded {
+          margin-left: 1ch;
+        }
+      }
+
+      .reply {
+        width: 19rem;
+        margin-bottom: 4px;
+
+        li {
+        border: {
+            width: 0 4px;
+            style: solid;
+            color: transparent;
+          }
+          border-radius: 4px;
+        }
+
+
+        li:hover {
+          cursor: pointer;
+          background-color: $grey-bghighlight;
+          border-color: $grey-bghighlight;
+        }
+
+        .dot {
+          height: 3px;
+          width: 3px;
+          background-color: rgb(180, 180, 180);
+          display: block;
+        }
+      }
+
+      .upvote,
+      .downvote {
+        @include i.image-before(
+          $section-icon-size,
+          $section-icon-size,
+          "../assets/icons/thumbs-up.svg"
+        );
+        padding-left: 2.55ch;
+      }
+
+      .downvote::before {
+        transform: rotate(180deg) translateY(50%);
+      }
+
+      .sub-reply {
+        @include i.image-before(
+          calc($section-icon-size - 5px),
+          calc($section-icon-size - 5px),
+          "../assets/icons/curved-arrow.svg"
+        );
+        padding-left: 2.6ch;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .comments-sponsor {
+      font-size: 1.23rem;
+      display: flex;
+      justify-content: space-between;
+
+      ul{
+        justify-content: space-between;
+        gap: 1ch;
+      }
+
+      li {
+        display: inline-block;
+        &.feedback {
+          cursor: pointer;
+        }
+      }
+
+      .info li:hover {
+        text-decoration: underline;
+      }
+
+      svg {
+        height: 1.5rem;
+        vertical-align: middle;
+        &:last-of-type{
+          height: 1.25rem;
+        }
+      }
+    }
   }
-
-
-
 }
