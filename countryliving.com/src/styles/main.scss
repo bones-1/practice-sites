@@ -1,6 +1,7 @@
 $font-color-blue: #0a5c80;
 $font-bgcolor-blue: #cde5f0;
 $font-color-dark: #000000;
+$page-logo-height: 2.1rem;
 
 @use "sass:color";
 @use "index" as i;
@@ -9,18 +10,22 @@ $font-color-dark: #000000;
 @include i.plain-link($font-color-blue);
 
 // * {
-//   border: 1px dashed red;
+//   border: 1px red dashed;
 // }
+
+.webpage-logo {
+  height: $page-logo-height;
+}
 
 nav {
   $nav-row-height: 5rem;
+
+  position: relative;
 
   font: {
     family: gotham;
     size: 1.3rem;
   }
-
-  position: relative;
 
   a {
     &:first-of-type > span {
@@ -34,7 +39,7 @@ nav {
 
   .top-bar,
   .bottom-bar {
-    min-height: $nav-row-height;
+    height: $nav-row-height;
     background-color: #fff9ed;
     color: #0a5c80;
     display: flex;
@@ -46,60 +51,51 @@ nav {
     justify-content: space-between;
     flex-wrap: wrap;
 
-    .global-directory {
-      $icon-height: 2.1rem;
-
-      display: flex;
-      height: 100%;
-      align-items: center;
-
-      //   color changes on hover
-      svg {
-        @include i.square-image($icon-height);
-        margin-left: 3ch;
-      }
-
-      .logo {
-        height: $icon-height;
-        margin-left: 1ch;
-      }
+    //   color changes on hover
+    svg.burger-menu {
+      height: 2.5rem;
+      margin-left: 2ch;
+      fill: $font-color-blue;
     }
 
-    .login-section {
-      span {
-        display: inline-block;
-        line-height: 3.5ch;
-        padding: 0 2ch;
-      }
+    .webpage-logo {
+      fill: $font-color-blue;
+      margin-left: 3px;
     }
   }
 
-  .bottom-bar {
-    ul {
-      margin: 0px;
-      padding-left: 0px;
-      width: 100%;
-      display: flex;
-      text-transform: uppercase;
-      list-style: none;
-      overflow: auto;
-      white-space: nowrap;
-      text-align: center;
-      scrollbar-width: none;
+  .login-section {
+    span {
+      display: inline-block;
+    }
+  }
+}
 
-      li {
-        display: inline-block;
-        padding: 0 3ch;
-      }
+.bottom-bar {
+  ul {
+    margin: 0px;
+    padding-left: 0px;
+    width: 100%;
+    display: flex;
+    text-transform: uppercase;
+    list-style: none;
+    overflow: auto;
+    white-space: nowrap;
+    text-align: center;
+    scrollbar-width: none;
 
-      a:hover {
-        text-decoration: underline;
-        text-underline-offset: 4px;
-      }
+    li {
+      display: inline-block;
+      padding: 0 3ch;
+    }
 
-      &::-webkit-scrollbar {
-        display: none;
-      }
+    a:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
 }
@@ -411,13 +407,12 @@ main {
   }
 
   .closing-content {
-
     grid-column: 2 / -1;
     display: grid;
     grid-template-columns: auto 2rem;
 
     .pointer-on-hover:hover {
-      cursor: pointer
+      cursor: pointer;
     }
 
     & > *:not(.comments) {
@@ -435,7 +430,7 @@ main {
 
       &.dull-line {
         border-color: rgba(0, 0, 0, 0.15);
-        &:nth-last-child(n - 2){
+        &:nth-last-child(n - 2) {
           margin-bottom: 1.6rem;
         }
 
@@ -538,14 +533,13 @@ main {
     font-family: Arial;
 
     ul {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 0;
-          margin: 0;
-          list-style: none;
-        }
-
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
 
     h4,
     h4 + p {
@@ -682,14 +676,13 @@ main {
         margin-bottom: 4px;
 
         li {
-        border: {
+          border: {
             width: 0 4px;
             style: solid;
             color: transparent;
           }
           border-radius: 4px;
         }
-
 
         li:hover {
           cursor: pointer;
@@ -737,7 +730,7 @@ main {
       display: flex;
       justify-content: space-between;
 
-      ul{
+      ul {
         justify-content: space-between;
         gap: 1ch;
       }
@@ -756,7 +749,7 @@ main {
       svg {
         height: 1.5rem;
         vertical-align: middle;
-        &:last-of-type{
+        &:last-of-type {
           height: 1.25rem;
         }
       }
@@ -765,8 +758,79 @@ main {
 }
 
 footer {
-  background-color: #000000;
-  color: #FFFFFF;
+  // Margins do not behave the same as original's
+  $background-color: #000000;
+  $content-color: #ffffff;
 
+  //  Create another mixin to make a text underline on hover
+  @include i.plain-link($content-color);
+
+  background-color: $background-color;
+  color: $content-color;
+  fill: $content-color;
   min-height: 55.5rem;
+  padding: {
+    top: 3rem;
+    bottom: 9.5rem;
+  }
+  display: grid;
+  grid-template-columns: 5% auto 5%;
+  font-family: "kepler";
+
+  & > * {
+    grid-column: 2;
+  }
+
+  & > p {
+    margin-top: 0;
+    line-height: 2.25rem;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .top-section {
+    display: flex;
+    gap: 3.8rem 8.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 3.3rem;
+
+    // Youtube icon look smaller than the others
+    // .social media does not wrap when it should at 500px. Look into this or consider removing flex and using media query instead.
+    .social-media {
+      display: flex;
+      justify-content: space-between;
+      width: 23rem;
+      svg {
+        @include i.square-image(1.6rem);
+      }
+    }
+  }
+
+  .references {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1ch;
+    row-gap: 2rem;
+    text-transform: capitalize;
+    margin-bottom: 2.5rem;
+
+    a {
+      width: 100%;
+    }
+  }
+
+  .llc-logo {
+    height: 3.8rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .legal-links {
+    text-transform: capitalize;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2ch;
+    margin-top: 1rem;
+  }
 }
