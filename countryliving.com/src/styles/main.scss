@@ -17,6 +17,12 @@ $page-logo-height: 2.1rem;
   height: $page-logo-height;
 }
 
+.blue-background {
+  background-color: $font-bgcolor-blue;
+  color: $font-color-blue;
+  padding: 0.9rem 2rem;
+}
+
 nav {
   $nav-row-height: 5rem;
 
@@ -39,7 +45,7 @@ nav {
 
   .top-bar,
   .bottom-bar {
-    height: $nav-row-height;
+    min-height: $nav-row-height;
     background-color: #fff9ed;
     color: #0a5c80;
     display: flex;
@@ -50,6 +56,7 @@ nav {
   .top-bar {
     justify-content: space-between;
     flex-wrap: wrap;
+    column-gap: 5px;
 
     //   color changes on hover
     svg.burger-menu {
@@ -64,14 +71,25 @@ nav {
     }
   }
 
+  // The code here is duplicated. Make a single flex mixin
   .login-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 0.5ch;
+    flex-wrap: wrap;
+    margin-right: max(1.7rem, calc(12% - 4rem));
+    height: 100%;
     span {
       display: inline-block;
+      height: 70%;
     }
   }
 }
 
 .bottom-bar {
+  border-top: 2px solid #f8f6f2;
+
   ul {
     margin: 0px;
     padding-left: 0px;
@@ -221,10 +239,10 @@ main {
       family: gotham;
     }
 
-    color: color-scale($font-color-blue, 30%);
+    color: $font-color-blue;
   }
 
-  .page-details {
+  .webpage-details {
     text-align: center;
 
     .page-title {
@@ -264,7 +282,10 @@ main {
     // author name is not going black
     .author {
       font-style: normal;
-      color: #000000 !important;
+
+      & a {
+        color: #000000;
+      }
 
       &:before {
         content: "";
@@ -282,11 +303,18 @@ main {
       margin: 0px;
     }
 
+    .bookmark-wrapper {
+      width: 100%;
+    }
     .bookmark {
-      margin-top: 2.8rem;
-      background-color: $font-bgcolor-blue;
-      color: $font-color-blue;
-      padding: 0.9rem 2rem;
+      margin: {
+        top: 2.8rem;
+        left: auto;
+        right: auto;
+      }
+      // create this alongside the absolute version
+      // @include i.image-before(2.5rem, 2.5rem, '../assets/icons/bookmark.svg');
+      width: max-content;
 
       &:before {
         content: "";
@@ -304,7 +332,7 @@ main {
       }
     }
 
-    .introduction {
+    .webpage-introduction {
       text-align: left;
       letter-spacing: 0.5px;
       line-height: 3rem;
@@ -341,6 +369,7 @@ main {
 
     h2 {
       font-size: 6.77rem;
+      line-height: 6.2rem;
     }
 
     h3 {
@@ -349,7 +378,7 @@ main {
 
     p,
     .bio-specs {
-      grid-column: 2 / 2;
+      grid-column: 2;
 
       font: {
         family: "charter";
@@ -375,17 +404,21 @@ main {
     }
 
     figure {
+      position: relative;
       grid-column: 1 / -1;
       width: 100%;
+      height: fit-content;
 
       margin: {
         left: 0px;
         right: 0px;
-        bottom: 0px;
+        bottom: 3.16rem;
       }
 
       img {
         width: 100%;
+        display: block;
+        // height: 100%;
       }
 
       figcaption {
@@ -394,14 +427,17 @@ main {
           weight: lighter;
           size: 1.15rem;
         }
-
         color: #6f6f6f;
         background-color: rgba(225, 225, 225, 0.85);
-        width: max-content;
-        padding: 0rem 1.4rem;
-        line-height: 3rem;
-        position: relative;
-        top: -4.05ch;
+        max-width: 100%;
+        height: min-content;
+        line-height: 2ch;
+        padding: 0.8rem 1.35rem;
+        // height: 3rem;
+        position: absolute;
+        bottom: 1px;
+        // display: flex;
+        // align-items: center;
       }
     }
   }
@@ -480,7 +516,7 @@ main {
         repeat: no-repeat;
         position-y: center;
         position-x: 1ch;
-        size: 4%;
+        size: 1.7rem;
       }
     }
 
@@ -495,7 +531,7 @@ main {
       background-color: $font-bgcolor-blue;
       padding: 1ch;
       margin: 1ch 0ch;
-      width: 30%;
+      width: min(30%, 15.5rem);
       display: inline-block;
       white-space: normal;
       border-radius: 5px;
@@ -529,6 +565,7 @@ main {
     @include i.plain-link(#000000);
 
     grid-column: 1 / -1;
+    max-width: 60rem;
     position: relative;
     font-family: Arial;
 
@@ -796,6 +833,10 @@ footer {
     flex-wrap: wrap;
     margin-bottom: 3.3rem;
 
+    .logo {
+      flex-basis: 100%;
+    }
+
     // Youtube icon look smaller than the others
     // .social media does not wrap when it should at 500px. Look into this or consider removing flex and using media query instead.
     .social-media {
@@ -831,6 +872,110 @@ footer {
     display: flex;
     flex-wrap: wrap;
     gap: 2ch;
-    margin-top: 1rem;
+    margin-top: 1.2rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  main {
+    .main-content,
+    .closing-content,
+    .webpage-introduction {
+      width: 61.1rem;
+      margin: 0 auto;
+    }
+
+    .main-content {
+      grid-column: 2;
+
+      .dog-card {
+        grid-template-columns: 1fr;
+
+        & > * {
+          grid-column: 1;
+        }
+      }
+    }
+
+    .closing-content {
+      .input-section {
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 1.8rem;
+
+        input[type="submit"] {
+          margin-bottom: 0;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+      }
+
+      .comments-section {
+        width: 100%;
+      }
+    }
+  }
+
+  footer {
+    .top-section .logo {
+      flex-basis: 15.5%;
+    }
+
+    .references {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  main {
+    .main-content,
+    .closing-content,
+    .webpage-introduction {
+      width: 61.1rem;
+      margin: 0;
+    }
+
+    .webpage-introduction,
+    .closing-content {
+      margin-left: 3%;
+      grid-column: 2;
+    }
+
+    .main-content {
+      grid-column: 1 / -1;
+      // background-color: rgb(229, 255, 0);
+      display: grid;
+      grid-template-columns: clamp(61.1rem, 55vw + 1rem, 100%);
+;
+      min-width: 1024px;
+      margin: 0 auto;
+
+      .dog-card {
+        // background-color: #2778ce;
+        grid-column: 1;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, auto) auto;
+        margin-bottom: 3.5rem;
+        
+
+        & > *:not(figure) {
+          grid-column: 2;
+          text-align: left;
+          margin-left: 2.2rem;
+        }
+
+        figure {
+          grid-row: 1 / -1;
+          grid-column: 1;
+          margin: 0;
+          // aspect-ratio: .72;
+          // overflow: hidden;
+
+          // height: 46.5rem;
+          // width: 31rem;
+        }
+      }
+    }
   }
 }
