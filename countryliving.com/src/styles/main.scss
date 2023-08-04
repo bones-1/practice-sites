@@ -928,6 +928,19 @@ footer {
 }
 
 @media only screen and (min-width: 1024px) {
+  nav {
+    position: relative;
+
+    .bottom-bar {
+      position: absolute;
+      top: 0;
+      left: 14em;
+      li {
+        padding: 0 2ch;
+      }
+    }
+  }
+
   main {
     .main-content,
     .closing-content,
@@ -936,28 +949,30 @@ footer {
       margin: 0;
     }
 
-    .webpage-introduction,
-    .closing-content {
-      margin-left: 3%;
-      grid-column: 2;
-    }
+    // .webpage-details,
+    // .closing-content {
+    //   // margin-left:
+    //   display: grid;
+    //   grid-template-columns: clamp(3rem, 50vw + 1rem, 2rem ) auto ;
+    //   & > * {
+    //     grid-column: 2 !important;
+    //   }
+    // }
 
     .main-content {
       grid-column: 1 / -1;
       // background-color: rgb(229, 255, 0);
-      display: grid;
-      grid-template-columns: clamp(61.1rem, 55vw + 1rem, 100%);
-;
+      // display: grid;
+      // grid-template-columns: clamp(61.1rem, 55vw + 1rem, 100%), auto;
       min-width: 1024px;
       margin: 0 auto;
 
       .dog-card {
         // background-color: #2778ce;
-        grid-column: 1;
-        grid-template-columns: repeat(2, 1fr);
+        // grid-column: 1;
+        grid-template-columns: clamp(3rem, 28vw + 1rem, 35rem ) auto ;
         grid-template-rows: repeat(4, auto) auto;
         margin-bottom: 3.5rem;
-        
 
         & > *:not(figure) {
           grid-column: 2;
@@ -976,6 +991,33 @@ footer {
           // width: 31rem;
         }
       }
+    }
+
+    .webpage-introduction,
+    .closing-content {
+      // background-color: pink;
+      display: grid;
+      grid-template-columns: clamp(0rem, 10vw + 0.1rem, 40%) 61.1rem;
+
+      & > * {
+        grid-column-start: 2 !important;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  main {
+
+    .main-content .dog-card {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .webpage-introduction,
+    .closing-content {
+      display: block;
+      margin: 0 auto;
+      width: 61.1rem;
     }
   }
 }
